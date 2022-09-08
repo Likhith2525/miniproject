@@ -212,12 +212,13 @@ userApi.post('/login', expressErrorHandler(async (req, res) => {
     let user = await userCollectionObj.findOne({ username: credentials.username })
     //if user not found
     if (user === null) {
-        res.send({ message: "invalid username" })
+        res.send({ message: "Invalid username" })
     }
     else {
         //compare the password
         let result = await bcryptjs.compare(credentials.password, user.password)
         //if not matched
+        //console.log(result)
         if (result === false) {
             res.send({ message: "Invalid password" })
         }
